@@ -119,21 +119,42 @@
 <body class="no-touch"  ng-controller="MainController">
 
 <div id="wrapper">
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-			<div class="col-lg-1">
-            <div class="navbar-header">
-                <div class="panel-body">
-					<a href="#showNamespaces">
-						<img src="includes/images/biocontainers-logo.png" height="50" width="50" />
-					</a>
-				</div>
-            </div>
-            </div>
-        </nav>
-		<br/>
-		<div id="main">
-			<div ng-view></div> 
-		</div>
+	<!--<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">-->
+			<!--<div class="col-lg-1">-->
+            <!--<div class="navbar-header">-->
+                <!--<div class="panel-body">-->
+					<!--<a href="#showNamespaces">-->
+						<!--<img src="includes/images/biocontainers-logo.png" height="50" width="50" />-->
+					<!--</a>-->
+				<!--</div>-->
+            <!--</div>-->
+
+            <!--</div>-->
+        <!--</nav>-->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        </button>
+        <a class="navbar-brand page-scroll" href="#page-top"><img src="includes/images/biocontainers-logo.png" style="width: 25px; height: 25px"/>BioContainers Registry UI</a>
+        <div  id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="http://biocontainers.pro">BioContainers</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="https://github.com/BioContainers">GitHub</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+
+
+
+    <br/>
+
+    <div id="main">
+        <div ng-view></div>
+    </div>
 </div>
 
 
