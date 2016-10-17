@@ -122,12 +122,15 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
     $scope.domain=$location.search()['domain'];
     $scope.repository=$location.search()['repository'];
     $scope.repo = {};
+    $scope.repo.starred = $location.search()['starred'];
+    $scope.repo.last_updated = $location.search()['modified'];
 
     if($scope.domain == "dockerhub"){
         repoURL    = cross_proxy + dockerhub_registry + $scope.repository;
         imagesURL  = repoURL + "/tags/";
         dockerFile = repoURL + "/dockerfile/";
         $http({method: "GET", url: repoURL}).success(function(data){
+            $scope.repo.starred = $location.search()['starred'];
             $scope.repo.repoName     = data.name;
             $scope.repo.description  = data.description;
             $scope.repo.star_count   = data.star_count;
@@ -154,11 +157,12 @@ app.controller('ImagesController', function($scope,$http,$location,$window,$cook
             'Authorization': "Bearer "+ "XRYLsxvQqmQLpP7RrajpFdiZntveNEyiffXyibK0"}}).success(function(data){
             $scope.repo.repoName     = $scope.repository;
             $scope.repo.description  = data.description;
+            $scope.repo.imagesList   = [];
             $scope.repo.domain       = "quay";
             $scope.repo.url          = "https://quay.io/organization/biocontainers" + $scope.repository;
-            $scope.repo.command      = "docker pull quay.io/biocontainers/" + $scope.repository
+            $scope.repo.command      = "docker pull quay.io/biocontainers/" + $scope.repository;
             angular.forEach(data.tags, function(key, value){
-                    $scope.repo.imagesList.push({tag: value.name, last_updated: value.last_modified, size: value.size})
+                    $scope.repo.imagesList.push({tag: key.name, last_updated: key.last_modified, size: key.size})
                 })
             });
     }

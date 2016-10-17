@@ -51,14 +51,14 @@
 						</tr>
 						<tr si-sortable="single" ng-repeat="container in namespacesList | filter:filter">
 							<td ng-if="container.domain == 'biodckr/'">
-								<a ng-href="#showImages?domain=dockerhub&repository={{container.name}}">{{ container.name }}</a>
+								<a ng-href="#showImages?domain=dockerhub&repository={{container.name}}&starred={{container.start_count}}">{{ container.name }}</a>
 							</td>
 							<td ng-if="container.domain == 'quay.io/biocontainers/'">
-								<a ng-href="#showImages?domain=quay&repository={{container.name}}">{{ container.name }}</a>
+								<a ng-href="#showImages?domain=quay&repository={{container.name}}&starred={{container.start_count}}&modified={{container.lastModified}}">{{ container.name }}</a>
 							</td>
 							<td>{{ container.description }}</td>
 							<td>{{ container.domain + container.name }}</td>
-							<td>{{container.lastModified | date:'yyyy-MM-dd'}}</td>
+							<td>{{ container.lastModified | date:'yyyy-MM-dd'}}</td>
 							<td align="center" ng-if="container.start_count == true"><i class="fa fa-star icon-d icon-d" aria-hidden="true"></i></td>
 							<td ng-if="container.start_count == false"></td>
 							<td  style="text-align: center; valign: middle; ">
