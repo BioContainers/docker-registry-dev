@@ -1,20 +1,19 @@
-# Docker Registry UI
+# BioContainers Registry UI
 
-[![wercker status](https://app.wercker.com/status/6a4a2e14de08a4e0e359285300cf1965/s/master "wercker status")](https://app.wercker.com/project/bykey/6a4a2e14de08a4e0e359285300cf1965)
 
-This project provides a web UI for [docker-registry](https://github.com/dotcloud/docker-registry) ([library/registry](https://registry.hub.docker.com/u/library/registry/) (>= 9.0)).
+This project provides a web UI for [BioContainers](https://biocontainers.pro)
 
 * This application is written in JavaScript, and you can deploy this application easily.
 * This application doesn't store any user data.
-* You can find the necessary information simply from the Docker Registry [documentation](https://github.com/docker/docker-registry).
+* You can find the necessary information simply from the Docker Registry [documentation](http://biocontainers.pro/docs/101/biocontainers-registry/).
 
 
-#### How to Use
+#### How to Test
 
-- Prepare CORS supported docker-registry.
+- To test the application go to **dist** directory and install `npm install -g http-server`, then use `httop-server` to test the app:
 
 ```
-docker run -d -e CORS_ORIGINS=[\'*\'] registry
+http-server -o
 ```
 
 We have already deployed this web-ui to our [github pages](http://worksap-ate.github.io/docker-registry-ui/#/).
@@ -28,28 +27,10 @@ Download the source code and put these files to a web server.
 
 #### Features
 
-  1. Show all repositories.
-    * Application shows all namespaces by default. Click the "Toggle" button shows all repositories. 
-  1. Search like docker hub
+- Show all biocontainers in dockerhub and quay.io.
+- Search for containers using the **Search Box**
     * If user wants to search in the entire hub just like the docker hub, then he can use the search option given at the top. The phrase he wants to search for will search in the entire hub.
-  1. Filter by word
-  1. Manage Tags
-    * rename
-    * delete
-    * copy the pull command to clipboard.
-  1. Change Registry
-    * He can change the registry IP whenever he wants by using the change registry option at the top.
-  1. Sort
+- Filter by word
+- Sort
     * User can use the sort option to sort the items accorsing to the alphabetical order whether it is ascending or decending.
-  1. Registry can be set through query parameter
-    * User can input the regitsty IP as a query parameter like : http://worksap-ate.github.io/docker-registry-ui/#/?IP=xxx.xxx.xxx.xxx
-      This way user can bookmark the registry directly.
-
-#### Trouble Shooting
-  1. Cannot connect to Docker registry
-    1. Check your Docker registry version
-      * This docker registry UI needs CORS support on Docker registry. It's supported from version 9.0.
-      * If you use under version 9.0, Please upgrade it.
-    2. Check your CORS support settings
-      * This system connects to your Docker registry using CORS.
-      * Please set the [CORS configuration](https://github.com/docker/docker-registry/blob/master/ADVANCED.md#cors) to your Docker registry.
+- Show the containers description. 
