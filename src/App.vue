@@ -11,7 +11,15 @@ export default {
   name: 'App',
   components:{
     defaultNav,
-  }
+  },
+  mounted: function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          console.log('location.origin',location.origin);
+          this.$router.replace({ path: redirect.replace(location.origin+this.$router.options.base,'/') });
+        }
+  },
 }
 </script>
 
