@@ -1,6 +1,6 @@
 <template>
-    <Menu mode="horizontal" :theme="theme1" active-name="1">
-        <a class="logo"><img src="/static/img/logo/biocontainers-logo.png" width="40" height="40">BioContainers Registry UI</a>
+    <Menu mode="horizontal" active-name="1">
+        <a class="logo"><img src="static/logo/biocontainers-logo.png" width="40" height="40">BioContainers Registry UI</a>
         <div class="menu">
             <MenuItem name="1">
                 <Icon type="ios-home-outline"></Icon>
@@ -17,7 +17,7 @@
     export default {
         data () {
             return {
-                
+               
             }
         }
     }

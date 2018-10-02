@@ -1,10 +1,99 @@
 <template>
   <div class="index-container">
+    <div class="banner">
+          <div class="content-wrapper">
+              <h1 class="title">Bio Containers</h1>
+              <p class="description">subtiltle</p> 
+          </div>
+      </div>
+
+
+
+
       <div class="search-wrapper">
         <Input v-model="keywords" icon="ios-search" placeholder="Search" style="width:100%"></Input>
       </div>
+
+
+
+
+
+<div class="container-wrapper">
+              <Card style="width:100%" class="card">
+                  <p slot="title">Containers Update Statistics</p>
+                  <p slot="extra">
+                    <Tooltip>
+                        <Icon type="ios-film-outline"></Icon>
+                        <div class="tooltip-content" slot="content">
+                            Species distribution for all the PSMs within the cluster.
+                        </div>
+                    </Tooltip>
+                  </p>
+                  <div class="description-wrapper">
+                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
+                  </div>
+                  <div class="tag-wrapper">
+                      <Tag color="default">default</Tag>
+                      <Tag color="default">default</Tag>
+                      <Tag color="default">default</Tag>
+                  </div>
+                  <div class="statue-wrapper">
+                      Not yet
+                  </div>
+              </Card>
+              <Card style="width:100%" class="card">
+                  <p slot="title">Containers Update Statistics</p>
+                  <p slot="extra">
+                    <Tooltip>
+                        <Icon type="ios-film-outline"></Icon>
+                        <div class="tooltip-content" slot="content">
+                            Species distribution for all the PSMs within the cluster.
+                        </div>
+                    </Tooltip>
+                  </p>
+                  <div class="description-wrapper">
+                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
+                  </div>
+                  <div class="tag-wrapper">
+                      <Tag color="default">default</Tag>
+                      <Tag color="default">default</Tag>
+                      <Tag color="default">default</Tag>
+                  </div>
+                  <div class="statue-wrapper">
+                      Not yet
+                  </div>
+              </Card>
+              <Card style="width:100%" class="card">
+                  <p slot="title">Containers Update Statistics</p>
+                  <p slot="extra">
+                    <Tooltip>
+                        <Icon type="ios-film-outline"></Icon>
+                        <div class="tooltip-content" slot="content">
+                            Species distribution for all the PSMs within the cluster.
+                        </div>
+                    </Tooltip>
+                  </p>
+                  <div class="description-wrapper">
+                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
+                  </div>
+                  <div class="tag-wrapper">
+                      <Tag color="default">default</Tag>
+                      <Tag color="default">default</Tag>
+                      <Tag color="default">default</Tag>
+                  </div>
+                  <div class="statue-wrapper">
+                      Not yet
+                  </div>
+              </Card>
+          </div>
+          
+     
+
+
+
+
       <div class="results-wrapper">
-          <Table stripe :columns="resultsTableCol" :data="resutls"></Table>
+          <Table stripe :columns="resultsTableCol" :data="resutls" @on-row-click="rowClick"></Table>
       </div>
       <div class="update-statistics">
           <Card style="width:100%" class="update-statistics-card">
@@ -68,19 +157,22 @@ export default {
     }
   },
   methods:{
-  	test(){
-  		this.$http
-            .get('/api/get')
+  	rowClick(){
+      this.$router.push({name:'Containerdetails'})
+    },
+    test(){
+      this.$http
+            .get('http://api.biocontainers.pro/api/v2/tools')
             .then(function(res){
-              console.log(res);
-                console.log(123);
+              console.log(res.body);
+              
             },function(err){
 
             });
-  	}
+    }
   },
   mounted(){
-  	this.test();
+    this.test();
   }
 }
 </script>
@@ -120,6 +212,48 @@ export default {
     .issue-statistics .ivu-card-bordered{
       border: 1px solid #d6e9c6 !important;
       border-color: #d6e9c6 !important;
+    }
+    .content-wrapper{
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .banner{
+      background-color: #eb8c1f;
+      color: #ffffff;
+      padding: 3rem 0;
+    }
+    .description{
+      font-size: 1.25rem;
+      font-weight: 300;
+    }
+    .title{
+      font-size: 4.5rem;
+      font-weight: 300;
+      line-height: 1.2;
+    }
+
+    @media (min-width: 576px){
+      .content-wrapper {
+          max-width: 540px;
+      }
+    }
+    @media (min-width: 768px){
+      .content-wrapper {
+          max-width: 720px;
+      }
+    }
+    @media (min-width: 992px){
+      .content-wrapper {
+          max-width: 960px;
+      }
+    }
+    @media (min-width: 1200px){
+      .content-wrapper {
+          max-width: 1140px;
+      }
     }
     /*
     table tr:last-child td:first-child {

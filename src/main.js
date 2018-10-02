@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import iView from 'iview';
-import '../static/iviewtheme/index.less';
+import './assets/iviewtheme/index.less';
 //import 'iview/dist/styles/iview.css';//we could use our own theme directory:import './assets/my-theme/index.less'; 'index.css' need to be created properly according to iview instruction.
 import locale from 'iview/dist/locale/en-US';
 import VueResource  from 'vue-resource'
