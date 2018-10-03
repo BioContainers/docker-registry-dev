@@ -4,6 +4,14 @@
         <div class="menu">
             <MenuItem name="1">
                 <Icon type="ios-home-outline"></Icon>
+                Stats Link
+            </MenuItem>
+            <MenuItem name="1">
+                <Icon type="ios-home-outline"></Icon>
+                Multi-package
+            </MenuItem>
+            <MenuItem name="1">
+                <Icon type="ios-home-outline"></Icon>
                 BioContainers
             </MenuItem>
             <MenuItem name="2">
