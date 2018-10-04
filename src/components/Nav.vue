@@ -2,11 +2,11 @@
     <Menu mode="horizontal" active-name="1">
         <a class="logo"><img src="static/logo/biocontainers-logo.png" width="40" height="40">BioContainers Registry UI</a>
         <div class="menu">
-            <MenuItem name="1">
-                <Icon type="ios-home-outline"></Icon>
+            <MenuItem name="3">
+                <Icon type="ios-checkmark"></Icon>
                 Stats Link
             </MenuItem>
-            <MenuItem name="1">
+            <MenuItem name="4">
                 <Icon type="ios-home-outline"></Icon>
                 Multi-package
             </MenuItem>

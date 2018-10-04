@@ -13,10 +13,29 @@
           <h1>Search Engine</h1>
           <div class="search-wrapper">
              <Input v-model="keywords" icon="ios-search" placeholder="Search" style="width:100%"></Input>
+             
            </div>
 
 
 
+            <div class="filter-wrapper">
+              <div class="filter">
+                    <span class="name">Filters:</span>
+                    <ButtonGroup>
+                        <Button v-for="(item ,index) in filters" :type="item.type" :key="index" @click="filterClick(index)">{{item.name}}</Button>
+                    </ButtonGroup>
+              </div>
+              <div class="filter">
+                    <span class="name">Sort:</span>
+                    <ButtonGroup>
+                        <Button v-for="(item ,index) in sorts" :type="item.type" :key="index" @click="sortClick(index)">{{item.name}}</Button>
+                    </ButtonGroup>
+              </div>
+               <div class="search-button-wrapper">
+                  <Button type="primary" @click="search">Search</Button>
+              </div>
+              
+          </div>
 
 
           <div class="container-wrapper">
@@ -159,6 +178,50 @@ export default {
                 address: 'Ottawa No. 2 Lake Park',
                 date: '2016-10-04'
             }
+        ],
+        filters:[
+            {
+                name:'All',
+                type:'primary',
+            },
+            {
+                name:'Cancel',
+                type:'default',
+            },
+            {
+                name:'Confirm',
+                type:'default',
+            },
+            {
+                name:'Confirm',
+                type:'default',
+            },
+            {
+                name:'Confirm',
+                type:'default',
+            }
+        ],
+        sorts:[
+            {
+                name:'All',
+                type:'primary',
+            },
+            {
+                name:'sorts',
+                type:'default',
+            },
+            {
+                name:'sorts2',
+                type:'default',
+            },
+            {
+                name:'sorts3',
+                type:'default',
+            },
+            {
+                name:'sorts4',
+                type:'default',
+            }
         ]
     }
   },
@@ -175,8 +238,41 @@ export default {
             },function(err){
 
             });
+    },
+    filterClick(index){
+        if(index == 0){
+          for(let i in this.filters){
+              if(i == index)
+                this.filters[i].type = 'primary';
+              else
+                this.filters[i].type = 'default';
+          }
+        }
+        else{
+            this.filters[0].type = 'default';
+            this.filters[index].type = this.filters[index].type == 'primary' ? 'default' : 'primary';
+        }
+    },
+    sortClick(index){
+        if(index == 0){
+          for(let i in this.sorts){
+              if(i == index)
+                this.sorts[i].type = 'primary';
+              else
+                this.sorts[i].type = 'default';
+          }
+        }
+        else{
+            this.sorts[0].type = 'default';
+            this.sorts[index].type = this.sorts[index].type == 'primary' ? 'default' : 'primary';
+        }
+    },
+    search(){
+        console.log('search');
     }
   },
+  
+
   mounted(){
     this.test();
   }
@@ -186,7 +282,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .search-wrapper{
-      width: 80%;
+      width: 100%;
       text-align: center;
       margin: 50px auto 0 auto;
     }
@@ -203,6 +299,13 @@ export default {
     .filter-wrapper .name{
       font-size: 0.875rem
     }
+    .content-wrapper{
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+    }
      .content{
       min-height: 300px;
       margin-top: 1rem;
@@ -216,13 +319,7 @@ export default {
       padding-top: 60px;
       color: #eb8c1f;
     }
-    .content-wrapper{
-      width: 100%;
-      padding-right: 15px;
-      padding-left: 15px;
-      margin-right: auto;
-      margin-left: auto;
-    }
+    
     .container-wrapper{
       padding: 20px 0;
       margin-top: 20px;
