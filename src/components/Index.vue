@@ -1,50 +1,39 @@
 <template>
   <div class="index-container">
-    <div class="banner">
+      <div class="banner">
           <div class="content-wrapper">
               <h1 class="title">Bio Containers</h1>
-              <p class="description">subtiltle</p> 
+              <p class="description">XXXXXXXXXXXXXX XXXXXXXXXXXX XXXXXXXXX XXXXXXX</p> 
           </div>
       </div>
-
-
-
-  <div class="content">
-          <h1>Search Engine</h1>
+      <div class="triangle triangle-down"></div>
+      <div class="content">
+          <h1>Available Containers</h1>
           <div class="search-wrapper">
-             <Input v-model="keywords" icon="ios-search" placeholder="Search" style="width:100%"></Input>
-             
-           </div>
-
-
-      <div class="search-options-wrapper">
-            <div class="filter-sort-wrapper">
-
-              <div class="filter">
-                    <span class="name">Filters:</span>
-                    <ButtonGroup>
-                        <Button v-for="(item ,index) in filters" :type="item.type" :key="index" @click="filterClick(index)">{{item.name}}</Button>
-                    </ButtonGroup>
+            <Input v-model="keywords" icon="ios-search" placeholder="Search" style="width:100%"></Input>
+          </div>
+          <div class="search-options-wrapper">
+              <div class="filter-wrapper">
+                  <div class="filter">
+                        <span class="name">Filters:</span>
+                        <ButtonGroup>
+                            <Button v-for="(item ,index) in filters" :type="item.type" :key="index" @click="filterClick(index)">{{item.name}}</Button>
+                        </ButtonGroup>
+                  </div>
+                  <div class="sort">
+                        <span class="name">Sort:</span>
+                        <ButtonGroup>
+                            <Button v-for="(item ,index) in sorts" :type="item.type" :key="index" @click="sortClick(index)">{{item.name}}</Button>
+                        </ButtonGroup>
+                  </div>
               </div>
-              <div class="sort">
-                    <span class="name">Sort:</span>
-                    <ButtonGroup>
-                        <Button v-for="(item ,index) in sorts" :type="item.type" :key="index" @click="sortClick(index)">{{item.name}}</Button>
-                    </ButtonGroup>
-              </div>
-
-            </div>
-
-               <div class="search-button-wrapper">
+              <div class="search-button-wrapper">
                   <Button type="primary" @click="search">Search</Button>
               </div>
-              </div>
           </div>
-
-
           <div class="container-wrapper">
               <Card class="card">
-                  <p slot="title">Card Title</p>
+                  <p slot="title">Containers Update Statistics</p>
                   <p slot="extra">
                     <Tooltip>
                         <Icon type="ios-film-outline"></Icon>
@@ -54,29 +43,7 @@
                     </Tooltip>
                   </p>
                   <div class="description-wrapper">
-                    descriptions draft of title
-                  </div>
-                  <div class="tag-wrapper">
-                      <Tag color="default">default-tag</Tag>
-                      <Tag color="default">default-tag</Tag>
-                      <Tag color="default">default-tag</Tag>
-                  </div>
-                  <div class="statue-wrapper">
-                      Not yet
-                  </div>
-              </Card>
-              <Card class="card">
-                  <p slot="title">Card Title 2</p>
-                  <p slot="extra">
-                    <Tooltip>
-                        <Icon type="ios-film-outline"></Icon>
-                        <div class="tooltip-content" slot="content">
-                            Species distribution for all the PSMs within the cluster.
-                        </div>
-                    </Tooltip>
-                  </p>
-                  <div class="description-wrapper">
-                    title description
+                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
                   </div>
                   <div class="tag-wrapper">
                       <Tag color="default">default</Tag>
@@ -88,7 +55,7 @@
                   </div>
               </Card>
               <Card class="card">
-                  <p slot="title">Card Title 3</p>
+                  <p slot="title">Containers Update Statistics</p>
                   <p slot="extra">
                     <Tooltip>
                         <Icon type="ios-film-outline"></Icon>
@@ -98,7 +65,51 @@
                     </Tooltip>
                   </p>
                   <div class="description-wrapper">
-                   contents of descriptions
+                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
+                  </div>
+                  <div class="tag-wrapper">
+                      <Tag color="default">default</Tag>
+                      <Tag color="default">default</Tag>
+                      <Tag color="default">default</Tag>
+                  </div>
+                  <div class="statue-wrapper">
+                      Not yet
+                  </div>
+              </Card>
+              <Card class="card">
+                  <p slot="title">Containers Update Statistics</p>
+                  <p slot="extra">
+                    <Tooltip>
+                        <Icon type="ios-film-outline"></Icon>
+                        <div class="tooltip-content" slot="content">
+                            Species distribution for all the PSMs within the cluster.
+                        </div>
+                    </Tooltip>
+                  </p>
+                  <div class="description-wrapper">
+                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
+                  </div>
+                  <div class="tag-wrapper">
+                      <Tag color="default">default</Tag>
+                      <Tag color="default">default</Tag>
+                      <Tag color="default">default</Tag>
+                  </div>
+                  <div class="statue-wrapper">
+                      Not yet
+                  </div>
+              </Card>
+              <Card class="card">
+                  <p slot="title">Containers Update Statistics</p>
+                  <p slot="extra">
+                    <Tooltip>
+                        <Icon type="ios-film-outline"></Icon>
+                        <div class="tooltip-content" slot="content">
+                            Species distribution for all the PSMs within the cluster.
+                        </div>
+                    </Tooltip>
+                  </p>
+                  <div class="description-wrapper">
+                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
                   </div>
                   <div class="tag-wrapper">
                       <Tag color="default">default</Tag>
@@ -113,27 +124,27 @@
           <div class="page-wrapper">
               <Page :total="40" size="small" show-elevator show-sizer />
           </div>
-          </div>
-     
-
-
-
-<!--
+      </div>
+      <!--
       <div class="results-wrapper">
           <Table stripe :columns="resultsTableCol" :data="resutls" @on-row-click="rowClick"></Table>
       </div>
       <div class="update-statistics">
-          <Card style="width:100%" class="update-statistics-card">
+          <Card style="width:100%" class="">
+              <p slot="title">Containers Update Statistics</p>
+          </Card>
+          <Card style="width:100%" class="">
               <p slot="title">Containers Update Statistics</p>
           </Card>
       </div>
+      -->
+      <!--
       <div class="issue-statistics">
           <Card style="width:100%" class="issue-statistics-card">
-              <p slot="title">GitHub Issues Statistics</p>
+              <p slot="title">GitHub Issues Statistics </p>
           </Card>
       </div>
--->
-
+      -->
   </div>
 </template>
 
@@ -145,43 +156,71 @@ export default {
         keywords:'',
         resultsTableCol:[
             {
-                title: 'Name',
-                key: 'name'
+                title: 'Container',
+                key: 'container'
             },
             {
-                title: 'Age',
-                key: 'age'
+                title: 'Description',
+                key: 'description'
             },
             {
-                title: 'Address',
-                key: 'address'
-            }
+                title: 'Real Name',
+                key: 'realname'
+            },
+            {
+                title: 'Last Modified',
+                key: 'lastmodified'
+            },
+            {
+                title: 'Starred/Starts',
+                key: 'starredstarts'
+            },
+            {
+                title: 'Popularity',
+                key: 'popularity'
+            },
+            {
+                title: 'Registry Link',
+                key: 'registrylink'
+            },
         ],
         resutls:[
             {
-                name: 'John Brown',
-                age: 28,
-                address: 'New York No. 1 Lake Park',
-                date: '2016-10-03'
+                container: 'John Brown',
+                description: 18,
+                realname: 'New York No. 1 Lake Park',
+                lastmodified: '2016-10-03',
+                starredstarts:'test',
+                popularity:'test',
+                registrylink:'test'
             },
             {
-                name: 'Jim Green',
-                age: 24,
-                address: 'London No. 1 Lake Park',
-                date: '2016-10-01'
+                container: 'John Brown',
+                description: 18,
+                realname: 'New York No. 1 Lake Park',
+                lastmodified: '2016-10-03',
+                starredstarts:'test',
+                popularity:'test',
+                registrylink:'test'
             },
             {
-                name: 'Joe Black',
-                age: 34,
-                address: 'Sydney No. 1 Lake Park',
-                date: '2016-10-02'
+                container: 'John Brown',
+                description: 18,
+                realname: 'New York No. 1 Lake Park',
+                lastmodified: '2016-10-03',
+                starredstarts:'test',
+                popularity:'test',
+                registrylink:'test'
             },
             {
-                name: 'Jon Snow',
-                age: 26,
-                address: 'Ottawa No. 2 Lake Park',
-                date: '2016-10-04'
-            }
+                container: 'John Brown',
+                description: 18,
+                realname: 'New York No. 1 Lake Park',
+                lastmodified: '2016-10-03',
+                starredstarts:'test',
+                popularity:'test',
+                registrylink:'test'
+            },
         ],
         filters:[
             {
@@ -207,38 +246,31 @@ export default {
         ],
         sorts:[
             {
-                name:'All',
+                name:'sort1',
                 type:'primary',
             },
             {
-                name:'sorts',
+                name:'sort2',
                 type:'default',
             },
             {
-                name:'sorts2',
-                type:'default',
-            },
-            {
-                name:'sorts3',
-                type:'default',
-            },
-            {
-                name:'sorts4',
+                name:'sort3',
                 type:'default',
             }
-        ]
+        ],
     }
   },
   methods:{
-  	rowClick(){
-      this.$router.push({name:'Containerdetails'})
+    rowClick(row){
+      console.log('row',row);
+        this.$router.push({name:'Containerdetails',params:{id:row.ID}});
     },
     test(){
+
       this.$http
-            .get('http://api.biocontainers.pro/api/v2/tools')
+            .get('http://api.biocontainers.pro/api/v2/metadata')
             .then(function(res){
               console.log(res.body);
-              
             },function(err){
 
             });
@@ -258,25 +290,17 @@ export default {
         }
     },
     sortClick(index){
-        if(index == 0){
           for(let i in this.sorts){
               if(i == index)
                 this.sorts[i].type = 'primary';
               else
                 this.sorts[i].type = 'default';
           }
-        }
-        else{
-            this.sorts[0].type = 'default';
-            this.sorts[index].type = this.sorts[index].type == 'primary' ? 'default' : 'primary';
-        }
     },
     search(){
         console.log('search');
     }
   },
-  
-
   mounted(){
     this.test();
   }
@@ -290,19 +314,13 @@ export default {
       text-align: center;
       margin: 50px auto 0 auto;
     }
-    .results-wrapper{
-      width: 80%;
-      margin: 30px auto 0 auto;
-    }
-
-
     .search-options-wrapper{
       margin: 20px auto 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .filter-sort-wrapper{
+    .filter-wrapper{
       display: flex;
     }
     .filter-wrapper .sort{
@@ -311,17 +329,57 @@ export default {
     .filter-wrapper .name{
       font-size: 0.875rem
     }
+    .results-wrapper{
+      width: 80%;
+      margin: 30px auto 0 auto;
+    }
+    .update-statistics{
+      width: 80%;
+      margin: 30px auto 0 auto;
+    }
+    .issue-statistics{
+      width: 80%;
+      margin: 30px auto 0 auto;
+    }
+    .banner{
+      background-color: #eb8c1f;
+      color: #ffffff;
+      padding: 3rem 0;
+    }
+    .triangle-down:before{
+     
+      /*background-image:url('static/triangle.svg');*/
+    }
+    .triangle:before{
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      content: '';
+      display: block;
+      width: 100%;
+      left: 0;
+      height: 30px;
+      /*background-image:url('static/triangle.svg');*/
+    }
     .content-wrapper{
       width: 80%;
       padding-right: 15px;
       padding-left: 15px;
       margin-right: auto;
       margin-left: auto;
-       -ms-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
       flex-wrap: wrap;
       -ms-flex-wrap: wrap;
     }
-     .content{
+    .title{
+      font-size: 4.5rem;
+      font-weight: 300;
+      line-height: 1.2;
+    }
+    .description{
+      font-size: 1.25rem;
+      font-weight: 300;
+    }
+    .content{
       min-height: 300px;
       margin-bottom: 6rem;
       font-size: 1.1rem;
@@ -336,7 +394,6 @@ export default {
       padding-top: 60px;
       color: #eb8c1f;
     }
-    
     .container-wrapper{
       margin-top: 50px;
     }
@@ -353,7 +410,6 @@ export default {
       overflow: hidden;
       transition: all 0.15s ease-out;
       -webkit-transition: all 0.15s ease-out;
-
     }
     .tooltip-content{
         white-space: normal;
@@ -363,55 +419,23 @@ export default {
       text-align: center;
       font-size: 12px;
     }
-    .update-statistics{
-      width: 80%;
-      margin: 30px auto 0 auto;
-    }
-    .issue-statistics{
-      width: 80%;
-      margin: 30px auto 0 auto;
-    }
-    .content-wrapper{
-      width: 80%;
-      padding-right: 15px;
-      padding-left: 15px;
-      margin-right: auto;
-      margin-left: auto;
-    }
-    .banner{
-      background-color: #eb8c1f;
-      color: #ffffff;
-      padding: 3rem 0;
-    }
-    .description{
-      font-size: 1.25rem;
-      font-weight: 300;
-    }
-    .title{
-      font-size: 4.5rem;
-      font-weight: 300;
-      line-height: 1.2;
-    }
-
-    @media (max-width: 700px) { 
+    @media (max-width: 840px) { 
       .card{ 
         width: calc((100% - 0px) / 1 - 3px);
         margin-left: 0 !important;
         margin-right: 0 !important;
       }
     }
+    @media (max-width: 1015px) and (min-width: 841px){ 
+      .card{ 
+        width: calc((100% - 60px) / 2 - 3px);
 
-    @media (max-width: 1015px) and (min-width: 701px){ 
-       .card{ 
-         width: calc((100% - 60px) / 2 - 3px);
-       }
+      }
       .container-wrapper{
         margin-left: -15px;
         margin-right: -15px;
       }
     }
-
-
     @media (max-width: 1510px) and (min-width: 1016px){ 
       .card{ 
         width: calc((100% - 90px) / 3 - 4px);
@@ -421,7 +445,6 @@ export default {
         margin-right: -15px;
       }
     }
-
     @media (max-width: 3910px) and (min-width: 1511px){ 
       .card{ 
         width: calc((100% - 120px) / 4 - 4px);
@@ -431,8 +454,9 @@ export default {
         margin-right: -15px;
       }
     }
-
+   
 </style>
+
 <style>
     .update-statistics .ivu-card-head{
       background-color: #d9edf7 !important;
@@ -448,7 +472,6 @@ export default {
       border: 1px solid #d6e9c6 !important;
       border-color: #d6e9c6 !important;
     }
-    
     /*
     table tr:last-child td:first-child {
         border-bottom-left-radius: 10px;
