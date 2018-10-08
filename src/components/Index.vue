@@ -372,7 +372,7 @@ export default {
       margin: 30px auto 0 auto;
     }
     .content-wrapper{
-      width: 100%;
+      width: 80%;
       padding-right: 15px;
       padding-left: 15px;
       margin-right: auto;

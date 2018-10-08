@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
 
+
+import ContainerDetails from '@/components/Containerdetails'
 import NotFound from '@/components/NotFound'
-import Containerdetails from '@/components/Containerdetails'
+import MappingData from '@/components/Mappingdata'
 
 Vue.use(Router)
 
@@ -18,8 +20,13 @@ export default new Router({
     },
     {
       path:'/containerdetails',
-      name: 'Containerdetails',
-      component: Containerdetails,
+      name: 'ContainerDetails',
+      component: ContainerDetails,
+    },
+    {
+      path:'/mappingdata',
+      name: 'MappingData',
+      component: MappingData,
     },
     {
       path:'*',
