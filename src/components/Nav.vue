@@ -1,20 +1,21 @@
 <template>
-    <Menu mode="horizontal" active-name="1">
+    <Menu mode="horizontal" active-name="1" @on-select="menuSlect">
         <a class="logo"><img src="static/logo/biocontainers-logo.png" width="40" height="40">BioContainers Registry UI</a>
         <div class="menu">
-            <MenuItem name="3">
-                <Icon type="ios-checkmark"></Icon>
+            
+            <MenuItem name="statslink">
+                <Icon type="ios-home-outline"></Icon>
                 Stats Link
             </MenuItem>
-            <MenuItem name="4">
+            <MenuItem name="multipackage">
                 <Icon type="ios-home-outline"></Icon>
                 Multi-package
             </MenuItem>
-            <MenuItem name="1">
+            <MenuItem name="biocontainers">
                 <Icon type="ios-home-outline"></Icon>
                 BioContainers
             </MenuItem>
-            <MenuItem name="2">
+            <MenuItem name="bithub">
                 <Icon type="social-github"></Icon>
                 GitHub
             </MenuItem>
@@ -27,7 +28,34 @@
             return {
                
             }
+        },
+    methods:{
+            menuSlect(name){
+                switch(name){
+                  case 'statslink':
+                    this.$router.push({name:'index'});
+                    //this.activeName = 'index';
+                  break;
+
+                  case 'multipackage':
+                    window.open('https://github.com/BioContainers/multi-package-containers');
+                    //this.activeName = 'discover';
+                  break;
+                  case 'biocontainers':
+                    //this.$router.push({ name: 'discover', params: { category: '全部'},query:{sort: "popular"}});
+                    //this.activeName = 'discover';
+                  break;
+                  case 'github':
+                    //this.$router.push({ name: 'discover', params: { category: '全部'},query:{sort: "popular"}});
+                    //this.activeName = 'discover';
+                  break;
+                }
+            } 
         }
+
+
+
+
     }
 </script>
 <style scoped>

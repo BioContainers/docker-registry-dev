@@ -17,24 +17,28 @@
            </div>
 
 
+      <div class="search-options-wrapper">
+            <div class="filter-sort-wrapper">
 
-            <div class="filter-wrapper">
               <div class="filter">
                     <span class="name">Filters:</span>
                     <ButtonGroup>
                         <Button v-for="(item ,index) in filters" :type="item.type" :key="index" @click="filterClick(index)">{{item.name}}</Button>
                     </ButtonGroup>
               </div>
-              <div class="filter">
+              <div class="sort">
                     <span class="name">Sort:</span>
                     <ButtonGroup>
                         <Button v-for="(item ,index) in sorts" :type="item.type" :key="index" @click="sortClick(index)">{{item.name}}</Button>
                     </ButtonGroup>
               </div>
+
+            </div>
+
                <div class="search-button-wrapper">
                   <Button type="primary" @click="search">Search</Button>
               </div>
-              
+              </div>
           </div>
 
 
@@ -290,11 +294,19 @@ export default {
       width: 80%;
       margin: 30px auto 0 auto;
     }
-    .filter-wrapper{
+
+
+    .search-options-wrapper{
       margin: 20px auto 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+    .filter-sort-wrapper{
+      display: flex;
+    }
+    .filter-wrapper .sort{
+      margin-left: 10px;
     }
     .filter-wrapper .name{
       font-size: 0.875rem
@@ -326,7 +338,7 @@ export default {
     }
     
     .container-wrapper{
-      margin-top: 30px;
+      margin-top: 50px;
     }
     .description-wrapper{
       margin-bottom: 5px;
@@ -409,7 +421,7 @@ export default {
         margin-right: -15px;
       }
     }
-    
+
     @media (max-width: 3910px) and (min-width: 1511px){ 
       .card{ 
         width: calc((100% - 120px) / 4 - 4px);
