@@ -3,12 +3,12 @@
       <div class="banner">
           <div class="content-wrapper">
               <h1 class="title">Bio Containers</h1>
-              <p class="description">XXXXXXXXXXXXXX XXXXXXXXXXXX XXXXXXXXX XXXXXXX</p> 
+              <p class="description">Subtitle</p> 
           </div>
       </div>
       <div class="triangle triangle-down"></div>
       <div class="content">
-          <h1>Available Containers</h1>
+          <h1>Search</h1>
           <div class="search-wrapper">
             <Input v-model="keywords" icon="ios-search" placeholder="Search" style="width:100%"></Input>
           </div>
@@ -32,97 +32,29 @@
               </div>
           </div>
           <div class="container-wrapper">
-              <Card class="card">
-                  <p slot="title">Containers Update Statistics</p>
+              <Card v-for="item in cardList" class="card">
+                  <p slot="title">{{item.toolname}}</p>
                   <p slot="extra">
                     <Tooltip>
                         <Icon type="ios-film-outline"></Icon>
                         <div class="tooltip-content" slot="content">
-                            Species distribution for all the PSMs within the cluster.
+                            {{item.content}}
                         </div>
                     </Tooltip>
                   </p>
                   <div class="description-wrapper">
-                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
+                    {{item.description}}
                   </div>
-                  <div class="tag-wrapper">
-                      <Tag color="default">default</Tag>
-                      <Tag color="default">default</Tag>
-                      <Tag color="default">default</Tag>
+                  <div v-for="tag in item.tags" class="tag-wrapper">
+                      <Tag color="default">{{tag}}</Tag>
                   </div>
-                  <div class="statue-wrapper">
-                      Not yet
-                  </div>
-              </Card>
-              <Card class="card">
-                  <p slot="title">Containers Update Statistics</p>
-                  <p slot="extra">
-                    <Tooltip>
-                        <Icon type="ios-film-outline"></Icon>
-                        <div class="tooltip-content" slot="content">
-                            Species distribution for all the PSMs within the cluster.
-                        </div>
-                    </Tooltip>
-                  </p>
-                  <div class="description-wrapper">
-                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
-                  </div>
-                  <div class="tag-wrapper">
-                      <Tag color="default">default</Tag>
-                      <Tag color="default">default</Tag>
-                      <Tag color="default">default</Tag>
-                  </div>
-                  <div class="statue-wrapper">
-                      Not yet
-                  </div>
-              </Card>
-              <Card class="card">
-                  <p slot="title">Containers Update Statistics</p>
-                  <p slot="extra">
-                    <Tooltip>
-                        <Icon type="ios-film-outline"></Icon>
-                        <div class="tooltip-content" slot="content">
-                            Species distribution for all the PSMs within the cluster.
-                        </div>
-                    </Tooltip>
-                  </p>
-                  <div class="description-wrapper">
-                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
-                  </div>
-                  <div class="tag-wrapper">
-                      <Tag color="default">default</Tag>
-                      <Tag color="default">default</Tag>
-                      <Tag color="default">default</Tag>
-                  </div>
-                  <div class="statue-wrapper">
-                      Not yet
-                  </div>
-              </Card>
-              <Card class="card">
-                  <p slot="title">Containers Update Statistics</p>
-                  <p slot="extra">
-                    <Tooltip>
-                        <Icon type="ios-film-outline"></Icon>
-                        <div class="tooltip-content" slot="content">
-                            Species distribution for all the PSMs within the cluster.
-                        </div>
-                    </Tooltip>
-                  </p>
-                  <div class="description-wrapper">
-                    XXXX XXXXXX XXXXX XXXX XXXX XXXX  XXXX XX
-                  </div>
-                  <div class="tag-wrapper">
-                      <Tag color="default">default</Tag>
-                      <Tag color="default">default</Tag>
-                      <Tag color="default">default</Tag>
-                  </div>
-                  <div class="statue-wrapper">
-                      Not yet
+                  <div class="state-wrapper">
+                      {{item.state}}
                   </div>
               </Card>
           </div>
           <div class="page-wrapper">
-              <Page :total="40" size="small" show-elevator show-sizer />
+              <Page :total="total" :current="current" :page-size="pageSize" size="small" show-elevator show-sizer @on-change="pageChange" @on-page-size-change="pageSizeChange"/>
           </div>
       </div>
       <!--
@@ -149,11 +81,16 @@
 </template>
 
 <script>
+import store from "@/store/store.js"
 export default {
   name: 'Index',
   data () {
     return {
         keywords:'',
+        total:'',
+        current:1,
+        pageSize:30,
+        cardList:[],
         resultsTableCol:[
             {
                 title: 'Container',
@@ -266,11 +203,21 @@ export default {
         this.$router.push({name:'Containerdetails',params:{id:row.ID}});
     },
     test(){
-
+      console.log('this.$store.state.baseApiURL',this.$store)
       this.$http
-            .get('http://api.biocontainers.pro/api/v2/metadata')
+            .get(this.$store.state.baseApiURL + '/api/v2/tools')
             .then(function(res){
-              console.log(res.body);
+              this.total = res.body.length;
+              for(let i=0; i<30; i++){
+                console.log(res.body[i])
+                var item = {
+                  toolname:res.body[i].toolname,
+                  description:res.body[i].description,
+                  tags:['tag1','tag2','tag2'],
+                  state:'Not yet'
+                }
+                this.cardList.push(item)
+              }
             },function(err){
 
             });
@@ -299,6 +246,12 @@ export default {
     },
     search(){
         console.log('search');
+    },
+    pageChange(page){
+      console.log('page',page);
+    },
+    pageSizeChange(pageSize){
+      console.log('pageSize',pageSize);
     }
   },
   mounted(){
@@ -399,14 +352,17 @@ export default {
     }
     .description-wrapper{
       margin-bottom: 5px;
+      white-space: normal;
     }
     .tag-wrapper{
       margin-bottom: 5px;
+      display: inline-block;
     }
     .card{
       display: inline-block;
       margin: 0 15px;
       margin-bottom: 30px;
+      min-height: 200px;
       overflow: hidden;
       transition: all 0.15s ease-out;
       -webkit-transition: all 0.15s ease-out;

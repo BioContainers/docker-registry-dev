@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store/store.js'
 import iView from 'iview';
 import './assets/iviewtheme/index.less';
 //import 'iview/dist/styles/iview.css';//we could use our own theme directory:import './assets/my-theme/index.less'; 'index.css' need to be created properly according to iview instruction.
@@ -34,15 +35,16 @@ import 'echarts/map/json/world.json'
 import 'echarts/map/js/world.js'
 
 
+
 Vue.config.productionTip = false
 Vue.use(iView, { locale });
 Vue.use(VueResource);
 Vue.component('chart', ECharts)
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

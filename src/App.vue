@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  	<defaultNav/>
+    <defaultNav/>
     <router-view/>
   </div>
 </template>
@@ -24,9 +24,14 @@ export default {
 </script>
 
 <style>
+html,body {
+    min-width: 840px !important;
+    height: 100vh;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 </style>

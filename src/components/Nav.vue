@@ -43,7 +43,8 @@
                   break;
 
                   case 'multipackage':
-                    window.open('http://biocontainers.pro/multi-package-containers/');
+                    this.$router.push({name:'Multipackage'});
+                    //window.open('http://biocontainers.pro/multi-package-containers/');
                     //this.activeName = 'discover';
                   break;
                   case 'biocontainers':

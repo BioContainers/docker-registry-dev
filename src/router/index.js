@@ -2,15 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
 
-
-import ContainerDetails from '@/components/Containerdetails'
+import ContainerDetails from '@/components/ContainerDetails'
 import NotFound from '@/components/NotFound'
-import MappingData from '@/components/Mappingdata'
+import MappingData from '@/components/MappingData'
+import Multipackage from '@/components/Multipackage'
 
 Vue.use(Router)
 
 export default new Router({
-  //mode: 'history',
+  mode: 'history',
   base: location.hostname.match(/localhost/)?'':'/registry/',
   routes: [
     {
@@ -19,20 +19,24 @@ export default new Router({
       component: Index
     },
     {
-      path:'/containerdetails',
+      path: '/containerdetails',
       name: 'ContainerDetails',
-      component: ContainerDetails,
+      component: ContainerDetails
     },
     {
-      path:'/mappingdata',
+      path: '/mappingdata',
       name: 'MappingData',
-      component: MappingData,
+      component: MappingData
+    },
+    {
+      path: '/multipackage',
+      name: 'Multipackage',
+      component: Multipackage
     },
     {
       path:'*',
       name: 'NotFound',
       component: NotFound,
     },
-    
   ]
 })

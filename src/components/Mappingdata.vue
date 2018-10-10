@@ -3,7 +3,7 @@
       <div class="banner">
           <div class="content-wrapper">
               <h1 class="title">Bio Containers</h1>
-              <p class="description">XXXXXXXXXXXXXX XXXXXXXXXXXX XXXXXXXXX XXXXXXX</p> 
+              <p class="description">subtitles</p> 
           </div>
       </div>
       <div class="triangle triangle-down"></div>
