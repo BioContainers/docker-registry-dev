@@ -19,7 +19,7 @@ export default new Router({
       component: Index
     },
     {
-      path: '/containerdetails',
+      path: '/containerdetails/:id',
       name: 'ContainerDetails',
       component: ContainerDetails
     },
