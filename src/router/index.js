@@ -2,7 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
 
-import Login from '@/components/Login'
+import ContainerDetails from '@/components/ContainerDetails'
+import NotFound from '@/components/NotFound'
+import MappingData from '@/components/MappingData'
+import Multipackage from '@/components/Multipackage'
 
 Vue.use(Router)
 
@@ -16,9 +19,19 @@ export default new Router({
       component: Index
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      path: '/containerdetails/:id',
+      name: 'ContainerDetails',
+      component: ContainerDetails
+    },
+    {
+      path: '/mappingdata',
+      name: 'MappingData',
+      component: MappingData
+    },
+    {
+      path: '/multipackage',
+      name: 'Multipackage',
+      component: Multipackage
     },
     {
       path:'*',
