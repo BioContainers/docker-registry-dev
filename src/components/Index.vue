@@ -3,7 +3,7 @@
       <div class="banner">
           <div class="content-wrapper">
               <h1 class="title">Bio Containers</h1>
-              <p class="description">Subtitle</p> 
+              <p class="description">Bioinformatics more accessible and reproducible</p> 
           </div>
       </div>
       <div class="triangle triangle-down"></div>
@@ -275,7 +275,7 @@ export default {
               console.log(res);
               console.log('this.cardList.length',this.cardList.length);
               this.total = 1000;
-              let tempLength = res.body.length>30?100:res.body.length;
+              let tempLength = res.body.length>30?30:res.body.length;
               if(tempLength > 0){
                   for(let i=0; i<tempLength; i++){
                       console.log(res.body[i])

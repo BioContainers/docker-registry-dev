@@ -3,7 +3,7 @@
       <div class="banner">
           <div class="content-wrapper">
               <h1 class="title">Bio Containers</h1>
-              <p class="description">subtitles</p> 
+              <p class="description">Statistics, GitHub Issues, and BioCotnainers usage</p> 
           </div>
       </div>
       <div class="triangle triangle-down"></div>
@@ -155,8 +155,8 @@ export default {
       Heatmap,
   },
   methods:{
-  	test(){
-  		this.$http
+    test(){
+      this.$http
             .get('/api/get')
             .then(function(res){
               console.log(res);
@@ -164,13 +164,13 @@ export default {
             },function(err){
 
             });
-  	},
+    },
     search(){
         console.log('search');
     }
   },
   mounted(){
-  	//this.test();
+    //this.test();
   }
 }
 </script>

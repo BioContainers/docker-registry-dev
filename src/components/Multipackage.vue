@@ -3,7 +3,7 @@
       <div class="banner">
           <div class="content-wrapper">
               <h1 class="title">Multi-package Containers</h1>
-              <p class="description">Combine several conda packages into one Docker container.</p> 
+              <p class="description">Combine several conda packages into one Docker container</p> 
           </div>
       </div>
       <div class="content-container">
