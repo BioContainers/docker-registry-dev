@@ -50,6 +50,8 @@ export default {
         RetrieveGitHubIssuesAPI3:"https://api.github.com/repos/biocontainers/specs/issues/comments?per_page=100",
         RetrieveGitHubIssuesAPI4:"https://api.github.com/repos/biocontainers/containers/issues/comments?per_page=100",
         dates:{},
+        githubdates:[],
+        githubDatesMap:[],
         keywords:'',
         resultsTableCol:[
             {
@@ -178,12 +180,57 @@ export default {
       let promise4 = this.$http.get(this.RetrieveGitHubIssuesAPI4)
            
       Promise.all([promise1, promise2, promise3, promise4]).then(([v1,v2,v3,v4]) => {
-        console.log('v1',v1);
-        console.log('v2',v2);
-        console.log('v3',v3);
-        console.log('v4',v4);
+        console.log('v1',v1.data);
+        let data1 = v1.data;
+        let data2 = v2.data;
+        let data3 = v3.data;
+        let data4 = v4.data;
+        console.log('v1.data',v1.data)
+        for(let i in data1){
+            let createAt   = new Date(data1[i].created_at).toLocaleDateString();
+            let modifiedAt = new Date(data1[i].updated_at).toLocaleDateString();
+            let closeAt    = new Date(data1[i].close_at).toLocaleDateString();
+            this.githubdates.push(createAt);
+            this.githubdates.push(modifiedAt);
+            this.githubdates.push(closeAt);
+        }
 
-        // Process of merging results v1 and v2 together here
+        for(let i in data2){
+            let createAt   = new Date(data2[i].created_at).toLocaleDateString();
+            let modifiedAt = new Date(data2[i].updated_at).toLocaleDateString();
+            let closeAt    = new Date(data2[i].close_at).toLocaleDateString();
+            this.githubdates.push(createAt);
+            this.githubdates.push(modifiedAt);
+            this.githubdates.push(closeAt);
+        }
+
+        for(let i in data3){
+            let createAt   = new Date(data3[i].created_at).toLocaleDateString();
+            let modifiedAt = new Date(data3[i].updated_at).toLocaleDateString();
+            let closeAt    = new Date(data3[i].close_at).toLocaleDateString();
+            this.githubdates.push(createAt);
+            this.githubdates.push(modifiedAt);
+            this.githubdates.push(closeAt);
+        }
+
+        for(let i in data4){
+            let createAt   = new Date(data4[i].created_at).toLocaleDateString();
+            let modifiedAt = new Date(data4[i].updated_at).toLocaleDateString();
+            let closeAt    = new Date(data4[i].close_at).toLocaleDateString();
+            this.githubdates.push(createAt);
+            this.githubdates.push(modifiedAt);
+            this.githubdates.push(closeAt);
+        }
+       
+        for(let i in this.githubdates){
+            var parts = this.githubdates[i].split('/');
+            var dateNumber = new Date(parts[2]+"-"+parts[1]+"-"+parts[0]).getTime()/1000;
+            var num = Math.floor(dateNumber);
+            if(!isNaN(num)) {
+                this.githubDatesMap[num.toString()] = this.githubDatesMap[num.toString()] ? this.githubDatesMap[num.toString()]+1 : 1;
+            }
+            //console.log('this.githubDatesMap',this.githubDatesMap);
+        }
       })
     },
     retrieveQuayIO(){
