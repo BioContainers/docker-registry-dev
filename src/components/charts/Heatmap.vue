@@ -116,8 +116,10 @@ export default {
   },
 
   methods:{
-    /*
+    
     setOptions(data){
+        console.log('issues number array',data);
+        /*
         this.visulizationNum = data.length < this.visulizationNum ? data.length : this.visulizationNum;
         data.sort(function(a,b){
             return a.count < b.count ? 1 : -1;
@@ -137,14 +139,14 @@ export default {
                 name:legendName[i]
             }
             this.option.series[0].data.push(item);
-        }
-    }*/
+        }*/
+    }
   },
   created(){
-    //this.$bus.$on('show-modifications', this.setOptions);
+    this.$bus.$on('show-issue', this.setOptions);
   },
   beforeCreate:function(){
-    //this.$bus.$off('show-modifications');
+    this.$bus.$off('show-issue');
   }
 }
 </script>
@@ -155,4 +157,3 @@ export default {
   width: auto !important;
 }
 </style>
- No newline at end of file
