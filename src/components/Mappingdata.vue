@@ -180,12 +180,12 @@ export default {
       let promise4 = this.$http.get(this.RetrieveGitHubIssuesAPI4)
            
       Promise.all([promise1, promise2, promise3, promise4]).then(([v1,v2,v3,v4]) => {
-        console.log('v1',v1.data);
+        //console.log('v1',v1.data);
         let data1 = v1.data;
         let data2 = v2.data;
         let data3 = v3.data;
         let data4 = v4.data;
-        console.log('v1.data',v1.data)
+        //console.log('v1.data',v1.data)
         for(let i in data1){
             let createAt   = new Date(data1[i].created_at).toLocaleDateString();
             let modifiedAt = new Date(data1[i].updated_at).toLocaleDateString();
@@ -229,15 +229,15 @@ export default {
             if(!isNaN(num)) {
                 this.githubDatesMap[num.toString()] = this.githubDatesMap[num.toString()] ? this.githubDatesMap[num.toString()]+1 : 1;
             }
-            //console.log('this.githubDatesMap',this.githubDatesMap);
         }
+        this.$bus.$emit('show-issue', this.githubDatesMap);
       })
     },
     retrieveQuayIO(){
       this.$http
             .get(this.QUAY_ORGANIZATION,{headers: {'X-Requested-With' :'XMLHttpRequest','Authorization': "Bearer "+ "XRYLsxvQqmQLpP7RrajpFdiZntveNEyiffXyibK0"}})
             .then(function(res){
-              console.log('retrieveQuayIO',res);
+              //console.log('retrieveQuayIO',res);
               let repositories = res.body.repositories
                 for(let i in repositories){
                    let item = {
@@ -256,7 +256,7 @@ export default {
 
               
 
-                console.log('this.dates',this.dates);
+                //console.log('this.dates',this.dates);
             },function(err){
               console.log('err',err);
             });
