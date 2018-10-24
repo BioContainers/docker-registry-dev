@@ -12,7 +12,6 @@
               <p slot="title">GitHub Issues Statistics</p>
               <Heatmap></Heatmap>
         </Card>
-        
       </div>
       <!--
       <div class="results-wrapper">
@@ -39,7 +38,7 @@
 
 <script>
 import Heatmap from '@/components/charts/Heatmap.vue'
-
+const moment = require('moment');
 export default {
   name: 'MappingData',
   data () {
@@ -51,7 +50,7 @@ export default {
         RetrieveGitHubIssuesAPI4:"https://api.github.com/repos/biocontainers/containers/issues/comments?per_page=100",
         dates:{},
         githubdates:[],
-        githubDatesMap:[],
+        githubDatesMap:{},
         keywords:'',
         resultsTableCol:[
             {
@@ -174,6 +173,7 @@ export default {
             });
     },
     retrieveGitHubIssues(){
+       
       let promise1 = this.$http.get(this.RetrieveGitHubIssuesAPI1);
       let promise2 = this.$http.get(this.RetrieveGitHubIssuesAPI2)
       let promise3 = this.$http.get(this.RetrieveGitHubIssuesAPI3)
@@ -185,16 +185,17 @@ export default {
         let data2 = v2.data;
         let data3 = v3.data;
         let data4 = v4.data;
-        //console.log('v1.data',v1.data)
+        console.log('v1.data',v1.data)
         for(let i in data1){
-            let createAt   = new Date(data1[i].created_at).toLocaleDateString();
+            //let createAt   = new Date(data1[i].created_at).toLocaleDateString();
+            let createAt   = moment(data1[i].created_at).format('DD/MM/YYYY')
             let modifiedAt = new Date(data1[i].updated_at).toLocaleDateString();
             let closeAt    = new Date(data1[i].close_at).toLocaleDateString();
             this.githubdates.push(createAt);
-            this.githubdates.push(modifiedAt);
-            this.githubdates.push(closeAt);
+            //this.githubdates.push(modifiedAt);
+            //this.githubdates.push(closeAt);
         }
-
+        /*
         for(let i in data2){
             let createAt   = new Date(data2[i].created_at).toLocaleDateString();
             let modifiedAt = new Date(data2[i].updated_at).toLocaleDateString();
@@ -221,8 +222,25 @@ export default {
             this.githubdates.push(modifiedAt);
             this.githubdates.push(closeAt);
         }
-       
+       */
+
+       //this.githubdates = ['19/10/2018','18/10/2018','18/10/2018','18/10/2018','18/10/2018','17/10/2018','16/10/2018','03/10/2018']
+      
         for(let i in this.githubdates){
+            this.githubDatesMap[this.githubdates[i]] = this.githubDatesMap[this.githubdates[i]] ? this.githubDatesMap[this.githubdates[i]]+1 : 1;
+        }
+        console.log('this.githubDatesMap',this.githubDatesMap)
+
+        this.$bus.$emit('show-issue', this.githubDatesMap);
+
+
+/*
+       this.githubdates = ['19/10/2018','18/10/2018','18/10/2018','18/10/2018','18/10/2018','17/10/2018','16/10/2018','03/10/2018']
+      
+        for(let i in this.githubdates){
+
+
+          console.log('11',this.githubdates[i]);
             var parts = this.githubdates[i].split('/');
             var dateNumber = new Date(parts[2]+"-"+parts[1]+"-"+parts[0]).getTime()/1000;
             var num = Math.floor(dateNumber);
@@ -230,7 +248,20 @@ export default {
                 this.githubDatesMap[num.toString()] = this.githubDatesMap[num.toString()] ? this.githubDatesMap[num.toString()]+1 : 1;
             }
         }
-        this.$bus.$emit('show-issue', this.githubDatesMap);
+      console.log('this.githubDatesMap',this.githubDatesMap);
+        let tempArray = [];
+        for(let i in this.githubdates){
+          let date = new Date(parseFloat(i));
+          let item = {
+            time:moment(date).format('DD-MM-YYYY'),
+            value:this.githubDatesMap[i]
+          }
+          tempArray.push(item);
+        }
+
+        console.log('tempArray',tempArray);
+        console.log('optimizeArray',this.optimizeArray(tempArray));
+        this.$bus.$emit('show-issue', tempArray);*/
       })
     },
     retrieveQuayIO(){
@@ -264,6 +295,27 @@ export default {
     search(){
         console.log('search');
         
+    },
+    optimizeArray(array){
+        let value;
+        let tempArray = [];
+        for(let i =0;i<array.length-1; i++){
+            //console.log(array[i].time);
+            //console.log(array[i+1].time);
+          if(array[i].time == array[i+1].time){
+            //console.log('true');
+            value = array[i].value + array[i+1].value;
+          }
+          else{
+            console.log('push');
+            let item = {
+              time: array[i].time,
+              value: value,
+            }
+            tempArray.push(item);
+          }
+        }
+        return tempArray;
     }
   },
   mounted(){

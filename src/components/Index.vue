@@ -278,7 +278,7 @@ export default {
               let tempLength = res.body.length>30?30:res.body.length;
               if(tempLength > 0){
                   for(let i=0; i<tempLength; i++){
-                      console.log(res.body[i])
+                      //console.log(res.body[i])
                       var item = {
                         id:res.body[i].id,
                         toolname:res.body[i].toolname.toUpperCase(),
