@@ -218,6 +218,10 @@ export default {
                 type:'default',
             }
         ],
+        query:{
+          offset:1,
+          limit:30
+        }
     }
   },
   methods:{
@@ -258,39 +262,35 @@ export default {
         this.loading=true;
         this.dataFound=false;
         this.cardList=[];
-        var query={};
         if(this.filter == 'Description')
-         query.description = this.keywords;
+         this.query.description = this.keywords;
         else if(this.filter == 'ID')
-          query.id = this.keywords;
+          this.query.id = this.keywords;
         else if(this.filter == 'Name')
-          query.toolname = this.keywords;
-        else if(this.filter == 'All')
-          query={}
-
+          this.query.toolname = this.keywords;
+        else if(this.filter == 'All'){
+          
+        }
         this.$http
-            .get(this.$store.state.baseApiURL + '/api/v2/tools',{params:query})
+            .get(this.$store.state.baseApiURL + '/api/v2/tools',{params:this.query})
+            //.jsonp(this.$store.state.baseApiURL + '/api/v2/tools',{params:this.query})
             .then(function(res){
-              //this.total = res.body.length;
-              console.log(res);
-              console.log('this.cardList.length',this.cardList.length);
               this.total = 1000;
-              let tempLength = res.body.length>30?30:res.body.length;
+              let tempLength = res.body.length;
               if(tempLength > 0){
+                  this.dataFound=true;
                   for(let i=0; i<tempLength; i++){
-                      //console.log(res.body[i])
+                      console.log(res.body[i])
                       var item = {
                         id:res.body[i].id,
                         toolname:res.body[i].toolname.toUpperCase(),
                         description:res.body[i].description,
                         tags:['tag1','tag2','tag2'],
-                        state:'Not yet',
+                        state:'',
                         color:res.body[i].verified ? '#19be6b': '#c5c8ce',
                       }
                       this.cardList.push(item);
-                      
                   }
-                  this.dataFound=true;
               }
               else{
                 this.dataFound=false;
@@ -307,10 +307,14 @@ export default {
             });
     },
     pageChange(page){
-      console.log('page',page);
+      this.current=page;
+      this.query.offset = this.current-1;
+      this.search();
     },
     pageSizeChange(pageSize){
-      console.log('pageSize',pageSize);
+      this.pageSize = pageSize;
+      this.query.limit = this.pageSize;
+      this.search();
     },
     gotoContainerDetails(id){
       console.log('ididididid',id);
