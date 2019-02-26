@@ -287,7 +287,6 @@ export default {
         else if(this.filter == 'All'){
           
         }
-        console.log(this.query);
         this.$http
             .get(this.$store.state.baseApiURL + '/api/v2/tools',{params:this.query})
             .then(function(res){
@@ -295,7 +294,6 @@ export default {
               if(tempLength > 0){
                   let limit = res.headers.map.last_page[0].split('&')[0].split('=')[1]
                   let offset = res.headers.map.last_page[0].split('&')[1].split('=')[1]
-                  console.log(limit, offset);
                   this.total = parseInt(limit)+parseInt(offset);
                   this.dataFound=true;
                   for(let i=0; i<tempLength; i++){
@@ -326,7 +324,8 @@ export default {
     },
     pageChange(page){
       this.current=page;
-      this.query.offset = this.current-1;
+      this.query.offset = parseInt(this.pageSize) * (parseInt(page)-1) + 1;
+      console.log(page,this.pageSize,this.query.offset);
       this.search();
     },
     pageSizeChange(pageSize){
