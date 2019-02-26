@@ -56,7 +56,8 @@
                       <div class="card-content-wrapper">
                         <div class="left">
                             <div class="description-wrapper">
-                              {{item.description}}
+                              <!--<Input v-model="item.description" disabled type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="" />-->
+                              <read-more more-str="" :text="item.description" link="#" less-str="read less" :max-chars="200"></read-more>
                             </div>
                             <!--
                             <div v-for="tag in item.tags" class="tag-wrapper">
@@ -67,7 +68,7 @@
                             </div>
                         </div>
                         <div class="right">
-                            <Icon type="md-checkmark" :color="item.color"/>
+                            <!--<Icon type="md-checkmark" :color="item.color"/>-->
                         </div>
                       </div> 
                   </Card>
@@ -294,7 +295,8 @@ export default {
               if(tempLength > 0){
                   let limit = res.headers.map.last_page[0].split('&')[0].split('=')[1]
                   let offset = res.headers.map.last_page[0].split('&')[1].split('=')[1]
-                  this.total = parseInt(limit)*parseInt(offset);
+                  console.log(limit, offset);
+                  this.total = parseInt(limit)+parseInt(offset);
                   this.dataFound=true;
                   for(let i=0; i<tempLength; i++){
                       var item = {
@@ -547,6 +549,18 @@ export default {
     .issue-statistics .ivu-card-bordered{
       border: 1px solid #d6e9c6 !important;
       border-color: #d6e9c6 !important;
+    }
+    .description-wrapper textarea{
+      resize: none !important;
+      outline: none !important;
+      border:none !important;
+    }
+    .description-wrapper .ivu-input{
+      border: none !important;
+      cursor: default;
+    }
+    .description-wrapper .ivu-input[disabled]{
+      background: none;
     }
     /*
     table tr:last-child td:first-child {
