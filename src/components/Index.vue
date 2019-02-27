@@ -39,7 +39,7 @@
            
       
                   <Card v-if="dataFound" v-for="item in cardList" class="card">
-                      <p slot="title"><a @click="gotoContainerDetails(item.id)">{{item.toolname}}</a></p>
+                      <p slot="title"><a class="tool-name" @click="gotoContainerDetails(item.id)">{{item.toolname}}</a></p>
                       <p slot="extra">
                         <Tooltip>
                             <!--
@@ -285,11 +285,12 @@ export default {
         else if(this.filter == 'Name')
           this.query.toolname = this.keywords;
         else if(this.filter == 'All'){
-          
+          this.query['all_fields_search'] = this.keywords;
         }
         this.$http
             .get(this.$store.state.baseApiURL + '/api/v2/tools',{params:this.query})
             .then(function(res){
+              console.log(res)
               let tempLength = res.body.length;
               if(tempLength > 0){
                   let limit = res.headers.map.last_page[0].split('&')[0].split('=')[1]
@@ -300,11 +301,12 @@ export default {
                       var item = {
                         id:res.body[i].id,
                         toolname:res.body[i].toolname.toUpperCase(),
-                        description:res.body[i].description,
+                        description:res.body[i].description ? 'res.body[i].description':'Tool description is coming',
                         tags:['tag1','tag2','tag2'],
                         state:'',
                         color:res.body[i].verified ? '#19be6b': '#c5c8ce',
                       }
+                      console.log(item);
                       this.cardList.push(item);
                   }
               }
@@ -495,6 +497,12 @@ export default {
     }
     .filter-button{
       min-width: 70px;
+    }
+    .tool-name{
+      /*
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;*/
     }
     @media (max-width: 840px) { 
       .card{ 
