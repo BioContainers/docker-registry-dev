@@ -177,7 +177,7 @@ export default {
 
 <style>
 .echarts.pie-modifications {
-  height: 700px !important;
+  height: 400px !important;
   width: auto !important;
 }
 </style>

@@ -3,20 +3,20 @@
         <Menu mode="horizontal" active-name="1" @on-select="menuSlect">
             <a class="logo" @click="gotoHome"><img src="static/logo/biocontainers-logo.png" width="40" height="40">BioContainers Registry UI</a>
             <div class="menu">
+                <MenuItem name="multipackage">
+                    <Icon type="ios-add-circle"></Icon>
+                    Multi-package
+                </MenuItem>
                 <MenuItem name="statslink">
                    <Icon type="ios-home-outline"></Icon>
-                    Stats Link
-                </MenuItem>
-                <MenuItem name="multipackage">
-                    <Icon type="ios-home-outline"></Icon>
-                    Multi-package
+                    Statistics
                 </MenuItem>
                 <MenuItem name="biocontainers">
                     <Icon type="ios-home-outline"></Icon>
                     BioContainers
                 </MenuItem>
                 <MenuItem name="github">
-                    <Icon type="social-github"></Icon>
+                    <Icon type="logo-github"></Icon>
                     GitHub
                 </MenuItem>
             </div>
@@ -49,10 +49,12 @@
                   case 'biocontainers':
                     //this.$router.push({ name: 'discover', params: { category: '全部'},query:{sort: "popular"}});
                     //this.activeName = 'discover';
+                   window.open('http://biocontainers.pro')
                   break;
                   case 'github':
                     //this.$router.push({ name: 'discover', params: { category: '全部'},query:{sort: "popular"}});
                     //this.activeName = 'discover';
+                      window.open('http://github.com/Biocontainers')
                   break;
                 }
             } 
