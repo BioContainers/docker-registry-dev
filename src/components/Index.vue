@@ -367,7 +367,7 @@ export default {
     gotoContainerDetails(id){
       console.log('ididididid',id);
       //this.$router.push({name:'dataset',params:{id:id}});
-      this.$router.push({name:'ContainerDetails',params:{id:id}});
+      this.$router.push({name:'tools',params:{id:id}});
     },
   },
   mounted(){

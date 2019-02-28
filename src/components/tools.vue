@@ -92,7 +92,7 @@
 <script>
 import store from "@/store/store.js"
 export default {
-  name: 'ContainerDetails',
+  name: 'tools',
   data () {
     return {
         keywords:'',
@@ -212,7 +212,7 @@ export default {
   methods:{
     rowClick(row){
       console.log('row',row);
-        this.$router.push({name:'Containerdetails',params:{id:row.ID}});
+        this.$router.push({name:'tools',params:{id:row.ID}});
     },
     filterClick(index){
         if(index == 0){

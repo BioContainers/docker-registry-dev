@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
 
-import ContainerDetails from '@/components/ContainerDetails'
+import tools from '@/components/tools'
 import NotFound from '@/components/NotFound'
 import MappingData from '@/components/MappingData'
 import Multipackage from '@/components/Multipackage'
@@ -19,9 +19,9 @@ export default new Router({
       component: Index
     },
     {
-      path: '/containerdetails/:id',
-      name: 'ContainerDetails',
-      component: ContainerDetails
+      path: '/tools/:id',
+      name: 'tools',
+      component: tools
     },
     {
       path: '/mappingdata',
