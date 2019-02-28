@@ -301,7 +301,7 @@ export default {
                       var item = {
                         id:res.body[i].id,
                         toolname:res.body[i].toolname.toUpperCase(),
-                        description:res.body[i].description ? 'res.body[i].description':'Tool description is coming',
+                        description:res.body[i].description ? res.body[i].description:'Tool description is coming',
                         tags:['tag1','tag2','tag2'],
                         state:'',
                         color:res.body[i].verified ? '#19be6b': '#c5c8ce',
