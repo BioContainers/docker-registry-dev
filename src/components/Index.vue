@@ -57,7 +57,8 @@
                         <div class="left">
                             <div class="description-wrapper">
                               <!--<Input v-model="item.description" disabled type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="" />-->
-                              <read-more more-str="" :text="item.description" link="#" less-str="read less" :max-chars="200"></read-more>
+                              <read-more more-str="" :text="item.description" link="#" less-str="read less" :max-chars="120"></read-more>
+                              <img class="license-img" :src="item.license"/>
                             </div>
                             <!--
                             <div v-for="tag in item.tags" class="tag-wrapper">
@@ -106,6 +107,11 @@
 </template>
 
 <script>
+const fixedEncodeURIComponent = (str) => {
+return encodeURIComponent(str).replace(/[!'()*]/g, (c) => {
+  
+})
+}
 import store from "@/store/store.js"
 export default {
   name: 'Index',
@@ -222,6 +228,14 @@ export default {
         query:{
           offset:1,
           limit:30
+        },
+        licenseColor:{
+          Apache: 'brightgreen',
+          MIT:'green',
+          GPL:'blue',
+          BSD:'yellow',
+          CC:'blueviolet',
+          Artistic:'important' 
         }
     }
   },
@@ -305,8 +319,23 @@ export default {
                         tags:['tag1','tag2','tag2'],
                         state:'',
                         color:res.body[i].verified ? '#19be6b': '#c5c8ce',
+                        license:''
                       }
-                      console.log(item);
+                      let found=false;
+                      for(let j in this.licenseColor){
+                        if(res.body[i].license&&res.body[i].license.match(j)){
+                          console.log(res.body[i].license)
+                          console.log(encodeURIComponent(res.body[i].license))
+                          item.license = 'https://img.shields.io/badge/license-'+encodeURIComponent(res.body[i].license).replace(/-/g,'--') + '-'+ this.licenseColor[j]+'.svg'
+                          found=true;
+                          break;
+                        }
+                      }
+                      if(res.body[i].license&&!found){
+                        console.log(res.body[i].license)
+                        console.log(encodeURIComponent(res.body[i].license))
+                        item.license = 'https://img.shields.io/badge/license-'+encodeURIComponent(res.body[i].license).replace(/-/g,'--') + '-lightgrey.svg';
+                      }
                       this.cardList.push(item);
                   }
               }
@@ -339,7 +368,7 @@ export default {
       console.log('ididididid',id);
       //this.$router.push({name:'dataset',params:{id:id}});
       this.$router.push({name:'ContainerDetails',params:{id:id}});
-    }
+    },
   },
   mounted(){
     this.search();
@@ -503,6 +532,11 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: normal;*/
+    }
+    .license-img{
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
     }
     @media (max-width: 840px) { 
       .card{ 
