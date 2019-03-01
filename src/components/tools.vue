@@ -141,7 +141,32 @@ export default {
             },
             {
                 title: 'Type',
-                key: 'type'
+                key: 'type',
+                align: 'center',
+                render:(h,params) => {
+                    return h('img', {
+                        attrs: {
+                            src: params.row.type,
+                        },
+                        style: {
+                            display:'inline-block',
+                            width: '40%'
+                        },
+                    })
+                }
+                // render: (h, params) => {
+                //             const row = params.row;
+                //             const color = (row.type == 'DOCKER') ? 'green': row.type == 'CONDA'? 'blue': 'red';
+                //             const text = row.type;
+                //
+                //             return h('Tag', {
+                //                 props: {
+                //                     type: 'dot',
+                //                     color: color,
+                //
+                //                 }
+                //             }, text);
+                //         }
             },
 
 
@@ -317,10 +342,13 @@ export default {
                         images:[]
                       }
                       for(let i=0; i<resbody.container_images.length; i++){
+                          let original_type = resbody.container_images[i].container_type == 'DOCKER'? "/static/images/docker.png":"/static/logo/biocontainers-logo.png"
                         var item = {
                             full_tag:resbody.container_images[i].full_tag,
-                            size: (resbody.container_images[i].size/1024).toFixed(2),
-                            last_updated: resbody.container_images[i].last_updated
+                            size: (resbody.container_images[i].size/1024).toFixed(2) + "M",
+                            last_updated: resbody.container_images[i].last_updated,
+                            // type: resbody.container_images[i].container_type
+                            type: original_type
                         }
                         this.containerObj.images.push(item);
                       }
