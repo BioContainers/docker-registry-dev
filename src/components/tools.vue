@@ -112,17 +112,18 @@ export default {
         filter:'All',
         resultsTableCol:[
             {
-                title: 'Container',
-                key: 'container'
+                title: 'Tool',
+                key: 'tool'
+            },
+            {
+                title: 'Version',
+                key: 'version'
             },
             {
                 title: 'Full Tag ',
                 key: 'full_tag'
             },
-            {
-                title: 'Tool',
-                key: 'tool'
-            },
+
             {
                 title: 'Last Modified',
                 key: 'last_updated'
@@ -150,7 +151,7 @@ export default {
                         },
                         style: {
                             display:'inline-block',
-                            width: '40%'
+                            width: '20%'
                         },
                     })
                 }
@@ -278,57 +279,57 @@ export default {
                 this.sorts[i].type = 'default';
           }
     },
-    search(){
-        this.loading=true;
-        this.dataFound=false;
-        this.cardList=[];
-        var query={};
-        if(this.filter == 'Description')
-         query.description = this.keywords;
-        else if(this.filter == 'ID')
-          query.id = this.keywords;
-        else if(this.filter == 'Name')
-          query.toolname = this.keywords;
-        else if(this.filter == 'All')
-          query={}
-
-        this.$http
-            .get(this.$store.state.baseApiURL + '/api/v2/tools',{params:query})
-            .then(function(res){
-              //this.total = res.body.length;
-              console.log(res);
-              console.log('this.cardList.length',this.cardList.length);
-              this.total = 1000;
-              let tempLength = res.body.length>30?30:res.body.length;
-              if(tempLength > 0){
-                  for(let i=0; i<tempLength; i++){
-                      console.log(res.body[i])
-                      var item = {
-                        toolname:res.body[i].toolname.toUpperCase(),
-                        description:res.body[i].description,
-                        tags:['tag1','tag2','tag2'],
-                        state:'Not yet',
-                        color:res.body[i].verified ? '#19be6b': '#c5c8ce',
-                      }
-                      this.cardList.push(item);
-                      
-                  }
-                  this.dataFound=true;
-              }
-              else{
-                this.dataFound=false;
-              }
-              this.loading=false;
-            },function(err){
-                console.log('err',err);
-                this.dataFound=false;
-                this.loading=false;
-                this.$Notice.error({
-                    title: 'Server Error',
-                    desc: err.body.error
-                });
-            });
-    },
+    // search(){
+    //     this.loading=true;
+    //     this.dataFound=false;
+    //     this.cardList=[];
+    //     var query={};
+    //     if(this.filter == 'Description')
+    //      query.description = this.keywords;
+    //     else if(this.filter == 'ID')
+    //       query.id = this.keywords;
+    //     else if(this.filter == 'Name')
+    //       query.toolname = this.keywords;
+    //     else if(this.filter == 'All')
+    //       query={}
+    //
+    //     this.$http
+    //         .get(this.$store.state.baseApiURL + '/api/v2/tools',{params:query})
+    //         .then(function(res){
+    //           //this.total = res.body.length;
+    //           console.log(res);
+    //           console.log('this.cardList.length',this.cardList.length);
+    //           this.total = 1000;
+    //           let tempLength = res.body.length>30?30:res.body.length;
+    //           if(tempLength > 0){
+    //               for(let i=0; i<tempLength; i++){
+    //                   console.log(res.body[i])
+    //                   var item = {
+    //                     toolname:res.body[i].toolname.toUpperCase(),
+    //                     description:res.body[i].description,
+    //                     tags:['tag1','tag2','tag2'],
+    //                     state:'Not yet',
+    //                     color:res.body[i].verified ? '#19be6b': '#c5c8ce',
+    //                   }
+    //                   this.cardList.push(item);
+    //
+    //               }
+    //               this.dataFound=true;
+    //           }
+    //           else{
+    //             this.dataFound=false;
+    //           }
+    //           this.loading=false;
+    //         },function(err){
+    //             console.log('err',err);
+    //             this.dataFound=false;
+    //             this.loading=false;
+    //             this.$Notice.error({
+    //                 title: 'Server Error',
+    //                 desc: err.body.error
+    //             });
+    //         });
+    // },
     containerID(){
             console.log('this.$router.params.id',this.$route.params.id);
          this.$http
@@ -341,16 +342,22 @@ export default {
                         version:resbody.meta_version,
                         images:[]
                       }
-                      for(let i=0; i<resbody.container_images.length; i++){
-                          let original_type = resbody.container_images[i].container_type == 'DOCKER'? "/static/images/docker.png":"/static/logo/biocontainers-logo.png"
-                        var item = {
-                            full_tag:resbody.container_images[i].full_tag,
-                            size: (resbody.container_images[i].size/1024).toFixed(2) + "M",
-                            last_updated: resbody.container_images[i].last_updated,
-                            // type: resbody.container_images[i].container_type
-                            type: original_type
-                        }
-                        this.containerObj.images.push(item);
+                      let all_versions = res.body
+                      for(let j = 0 ; j < all_versions.length; j++){
+                          let current_version = all_versions[j]
+                          for(let i=0; i < current_version.container_images.length; i++){
+                              let original_type = current_version.container_images[i].container_type == 'DOCKER'? "/static/images/docker.png":"/static/logo/biocontainers-logo.png"
+                              var item = {
+                                  tool: current_version.name,
+                                  version: current_version.meta_version,
+                                  full_tag:current_version.container_images[i].full_tag,
+                                  size: (current_version.container_images[i].size/1024).toFixed(2) + "M",
+                                  last_updated: current_version.container_images[i].last_updated,
+                                  // type: resbody.container_images[i].container_type
+                                  type: original_type
+                              }
+                              this.containerObj.images.push(item);
+                          }
                       }
 
             },function(err){
