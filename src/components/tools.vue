@@ -49,21 +49,23 @@
                   </div>
                   -->   
             </div>
-            <div class="card-content-wrapper">
-                      <Card dis-hover v-for="item in containerObj.images" class="card">
-                            <p slot="title">Container Images</p>
-                            <div>
-                                <span>Tag: </span><span>{{item.fullTag}}</span>
-                            </div>
 
-                            <div>
-                                <span>Size: </span><span>{{item.size}}M</span>
-                            </div>
-                            <div>
-                                <span>Last Update: </span><span>{{item.last_update}}</span>
-                            </div>
-                      </Card>
-                  </div>
+            <!--<div class="card-content-wrapper">-->
+                      <!--<Card dis-hover v-for="item in containerObj.images" class="card">-->
+                            <!--<p slot="title">Container Images</p>-->
+                            <!--<div>-->
+                                <!--<span>Tag: </span><span>{{item.fullTag}}</span>-->
+                            <!--</div>-->
+
+                            <!--<div>-->
+                                <!--<span>Size: </span><span>{{item.size}}M</span>-->
+                            <!--</div>-->
+                            <!--<div>-->
+                                <!--<span>Last Update: </span><span>{{item.last_update}}</span>-->
+                            <!--</div>-->
+                      <!--</Card>-->
+                  <!--</div>-->
+           <Table :columns="resultsTableCol" :data="containerObj.images"></Table>
           </div>
           
       </div>
@@ -114,29 +116,36 @@ export default {
                 key: 'container'
             },
             {
-                title: 'Description',
-                key: 'description'
+                title: 'Full Tag ',
+                key: 'full_tag'
             },
             {
-                title: 'Real Name',
-                key: 'realname'
+                title: 'Tool',
+                key: 'tool'
             },
             {
                 title: 'Last Modified',
-                key: 'lastmodified'
+                key: 'last_updated'
+            },
+            // {
+            //     title: 'Starred/Starts',
+            //     key: 'starredstarts'
+            // },
+            // {
+            //     title: 'Popularity',
+            //     key: 'popularity'
+            // },
+            {
+                title: 'Size',
+                key: 'size'
             },
             {
-                title: 'Starred/Starts',
-                key: 'starredstarts'
+                title: 'Type',
+                key: 'type'
             },
-            {
-                title: 'Popularity',
-                key: 'popularity'
-            },
-            {
-                title: 'Registry Link',
-                key: 'registrylink'
-            },
+
+
+
         ],
         resutls:[
             {
@@ -309,36 +318,13 @@ export default {
                       }
                       for(let i=0; i<resbody.container_images.length; i++){
                         var item = {
-                            fullTag:resbody.container_images[i].full_tag,
+                            full_tag:resbody.container_images[i].full_tag,
                             size: (resbody.container_images[i].size/1024).toFixed(2),
-                            last_update: resbody.container_images[i].last_updated
+                            last_updated: resbody.container_images[i].last_updated
                         }
                         this.containerObj.images.push(item);
                       }
-              //this.total = res.body.length;
-              /*console.log(res);
-              console.log('this.cardList.length',this.cardList.length);
-              this.total = 1000;
-              let tempLength = res.body.length>30?30:res.body.length;
-              if(tempLength > 0){
-                  for(let i=0; i<tempLength; i++){
-                      console.log(res.body[i])
-                      var item = {
-                        toolname:res.body[i].toolname.toUpperCase(),
-                        description:res.body[i].description,
-                        tags:['tag1','tag2','tag2'],
-                        state:'Not yet',
-                        color:res.body[i].verified ? '#19be6b': '#c5c8ce',
-                      }
-                      this.cardList.push(item);
-                      
-                  }
-                  this.dataFound=true;
-              }
-              else{
-                this.dataFound=false;
-              }
-              this.loading=false;*/
+
             },function(err){
                 console.log('err',err);
                 this.dataFound=false;
