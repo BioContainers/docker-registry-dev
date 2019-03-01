@@ -342,7 +342,7 @@ export default {
                         images:[]
                       }
                       for(let i=0; i<resbody.container_images.length; i++){
-                          let original_type = resbody.container_images[i].container_type == 'DOCKER'? "/static/images/docker.png":"/static/logo/biocontainers-logo.png"
+                          let original_type = resbody.container_images[i].container_type == 'DOCKER'? "static/images/docker.png":"static/logo/biocontainers-logo.png"
                         var item = {
                             full_tag:resbody.container_images[i].full_tag,
                             size: (resbody.container_images[i].size/1024).toFixed(2) + "M",
