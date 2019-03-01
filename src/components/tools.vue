@@ -346,7 +346,7 @@ export default {
                       for(let j = 0 ; j < all_versions.length; j++){
                           let current_version = all_versions[j]
                           for(let i=0; i < current_version.container_images.length; i++){
-                              let original_type = current_version.container_images[i].container_type == 'DOCKER'? "/static/images/docker.png":"/static/logo/biocontainers-logo.png"
+                              let original_type = current_version.container_images[i].container_type == 'DOCKER'? "static/images/docker.png":"static/logo/biocontainers-logo.png"
                               var item = {
                                   tool: current_version.name,
                                   version: current_version.meta_version,
