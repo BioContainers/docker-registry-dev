@@ -53,13 +53,14 @@
                       <Card dis-hover v-for="item in containerObj.images" class="card">
                             <p slot="title">Container Images</p>
                             <div>
-                                <span>Tag: </span><span>{{item.tag}}</span>
+                                <span>Tag: </span><span>{{item.fullTag}}</span>
+                            </div>
+
+                            <div>
+                                <span>Size: </span><span>{{item.size}}M</span>
                             </div>
                             <div>
-                                <span>FullTag: </span><span>{{item.fullTag}}</span>
-                            </div>
-                            <div>
-                                <span>Size: </span><span>{{item.size}}</span>
+                                <span>Last Update: </span><span>{{item.last_update}}</span>
                             </div>
                       </Card>
                   </div>
@@ -308,9 +309,9 @@ export default {
                       }
                       for(let i=0; i<resbody.container_images.length; i++){
                         var item = {
-                            tag:resbody.container_images[i].tag,
-                            fullTag:resbody.container_images[i].fullTag,
-                            size: Math.round(resbody.container_images[i].size/1024/1024),
+                            fullTag:resbody.container_images[i].full_tag,
+                            size: (resbody.container_images[i].size/1024).toFixed(2),
+                            last_update: resbody.container_images[i].last_updated
                         }
                         this.containerObj.images.push(item);
                       }
