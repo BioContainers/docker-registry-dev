@@ -19,6 +19,14 @@
                     <Icon type="logo-github"></Icon>
                     GitHub
                 </MenuItem>
+                <MenuItem name="twitter">
+                    <Icon type="logo-twitter"></Icon>
+                    Twitter
+                </MenuItem>
+                <MenuItem name="scholar">
+                    <Icon type="ios-school"></Icon>
+                    Scholar
+                </MenuItem>
             </div>
         </Menu>
     </div>
@@ -56,6 +64,12 @@
                     //this.activeName = 'discover';
                       window.open('http://github.com/Biocontainers')
                   break;
+                  case 'twitter':
+                      window.open('https://twitter.com/BioContainers')
+                  break;
+                  case 'scholar':
+                      window.open('https://scholar.google.co.uk/citations?user=O6xG2-EAAAAJ')
+                  breask;
                 }
             } 
         }
