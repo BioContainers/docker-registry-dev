@@ -19,6 +19,10 @@
                         <ButtonGroup>
                             <Button class="filter-button" v-for="(item ,index) in filters" :type="item.type" :key="index" @click="filterClick(index)">{{item.name}}</Button>
                         </ButtonGroup>
+                        <span class="name">Sort:</span>
+                        <Select v-model="sort" style="width:200px" @on-change="sortChange">
+                            <Option v-for="item in sortList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        </Select>
                   </div>
                   <!--
                   <div class="sort">
@@ -236,7 +240,18 @@ export default {
           BSD:'yellow',
           CC:'blueviolet',
           Artistic:'important' 
-        }
+        },
+        sort:'alphabet',
+        sortList:[
+          /*{
+              label: 'Default',
+              value: 'default'
+          },*/
+          {
+              label: 'Alphabet',
+              value: 'alphabet'
+          },
+        ]
     }
   },
   methods:{
@@ -338,6 +353,11 @@ export default {
                       }
                       this.cardList.push(item);
                   }
+                  this.cardList.sort(function(a, b){
+                      if(a.toolname < b.toolname) return -1;
+                      if(a.toolname > b.toolname) return 1;
+                      return 0;
+                  });
               }
               else{
                 this.dataFound=false;
@@ -369,6 +389,9 @@ export default {
       //this.$router.push({name:'dataset',params:{id:id}});
       this.$router.push({name:'tools',params:{id:id}});
     },
+    sortChange(val){
+      //if(val=='default')
+    }
   },
   mounted(){
     this.search();
