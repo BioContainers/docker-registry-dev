@@ -8,37 +8,29 @@
       </div>
       <div class="triangle triangle-down"></div>
       <div class="content">
-          <h1>Search</h1>
-          <div class="search-wrapper">
-            <Input v-model="keywords" icon="ios-search" placeholder="Search" style="width:100%"></Input>
-          </div>
-          <div class="search-options-wrapper">
-              <div class="filter-wrapper">
-                  <div class="filter">
-                        <span class="name">Filters:</span>
-                        <ButtonGroup>
-                            <Button class="filter-button" v-for="(item ,index) in filters" :type="item.type" :key="index" @click="filterClick(index)">{{item.name}}</Button>
-                        </ButtonGroup>
-                  </div>
-                  <!--
-                  <div class="sort">
-                        <span class="name">Sort:</span>
-                        <ButtonGroup>
-                            <Button v-for="(item ,index) in sorts" :type="item.type" :key="index" @click="sortClick(index)">{{item.name}}</Button>
-                        </ButtonGroup>
-                  </div>
-                  -->
-              </div>
-              <div class="search-button-wrapper">
-                  <Button type="primary" @click="search">Search</Button>
-              </div>
-          </div>
+          <!--<h1>Search</h1>-->
+          <!--<div class="search-wrapper">-->
+            <!--<Input v-model="keywords" icon="ios-search" placeholder="Search" style="width:100%"></Input>-->
+          <!--</div>-->
+          <!--<div class="search-options-wrapper">-->
+              <!--<div class="filter-wrapper">-->
+                  <!--<div class="filter">-->
+                        <!--<span class="name">Filters:</span>-->
+                        <!--<ButtonGroup>-->
+                            <!--<Button class="filter-button" v-for="(item ,index) in filters" :type="item.type" :key="index" @click="filterClick(index)">{{item.name}}</Button>-->
+                        <!--</ButtonGroup>-->
+                  <!--</div>-->
+              <!--</div>-->
+              <!--&lt;!&ndash;<div class="search-button-wrapper">&ndash;&gt;-->
+                  <!--&lt;!&ndash;<Button type="primary" @click="search">Search</Button>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--</div>-->
           <div class="container-wrapper">
             <div class="title-container">
                   <div class="title-wrapper">
                       <div class="card-title">
-                        <span>Name:{{containerObj.name}}</span>
-                        <span>Version:{{containerObj.version}}</span>
+                        <span>Tool: {{containerObj.name}}</span>
+                        <!--<span>License:{{containerObj.license}}</span>-->
                       </div>
                   </div>
                   <!--
@@ -47,8 +39,28 @@
                         <span>Images</span>
                       </div>
                   </div>
-                  -->   
+                  -->
             </div>
+            <!--<div class="container-wrapper-cards">-->
+                <!--<Card v-for="item in containerObj.versions" class="card">-->
+                      <!--<p slot="title">{{item.tool}}</p>-->
+                      <!--<p slot="extra">{{item.version}}</p>-->
+                      <!--<div class="card-content-wrapper">-->
+                        <!--<div class="left">-->
+                            <!--<div class="description-wrapper">-->
+                              <!--<read-more more-str="" :text="item.description" link="#" less-str="read less" :max-chars="120">-->
+
+                              <!--</read-more>-->
+                              <!--<img class="license-img" :src="item.license"/>-->
+                            <!--</div>-->
+                            <!--<div class="state-wrapper">-->
+                                <!--{{item.state}}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                  <!--</Card>-->
+              <!--</div>-->
+
 
             <!--<div class="card-content-wrapper">-->
                       <!--<Card dis-hover v-for="item in containerObj.images" class="card">-->
@@ -111,35 +123,7 @@ export default {
         dataFound:false,
         filter:'All',
         resultsTableCol:[
-            {
-                title: 'Tool',
-                key: 'tool'
-            },
-            {
-                title: 'Version',
-                key: 'version'
-            },
-            {
-                title: 'Full Tag ',
-                key: 'full_tag'
-            },
 
-            {
-                title: 'Last Modified',
-                key: 'last_updated'
-            },
-            // {
-            //     title: 'Starred/Starts',
-            //     key: 'starredstarts'
-            // },
-            // {
-            //     title: 'Popularity',
-            //     key: 'popularity'
-            // },
-            {
-                title: 'Size',
-                key: 'size'
-            },
             {
                 title: 'Type',
                 key: 'type',
@@ -151,23 +135,54 @@ export default {
                         },
                         style: {
                             display:'inline-block',
-                            width: '20%'
+                            width: '40%'
                         },
                     })
                 }
-                // render: (h, params) => {
-                //             const row = params.row;
-                //             const color = (row.type == 'DOCKER') ? 'green': row.type == 'CONDA'? 'blue': 'red';
-                //             const text = row.type;
-                //
-                //             return h('Tag', {
-                //                 props: {
-                //                     type: 'dot',
-                //                     color: color,
-                //
-                //                 }
-                //             }, text);
-                //         }
+            },
+            {
+                title: 'Tool',
+                key: 'tool',
+                align: 'center',
+            },
+            {
+                title: 'Version',
+                key: 'version',
+                align: 'center',
+                sortable: true
+            },
+            {
+                title: 'Modified',
+                key: 'last_updated',
+                align: 'center',
+                sortable: true
+            },
+            {
+                title: 'Size',
+                key: 'size',
+                align: 'center',
+                sortable: true
+            },
+            {
+                title: 'Full Tag ',
+                key: 'full_tag',
+                width:400,
+                // align: 'center',
+                render: (h, params) => {
+                            const row = params.row;
+                            const color = 'blue';
+                            const text = row.full_tag;
+
+                            return h('Tag', {
+                                props: {
+                                    type: 'box',
+                                    color: color
+                                },
+                                style: {
+                                    color: 'black'
+                                }
+                            }, text);
+                        }
             },
 
 
@@ -340,19 +355,29 @@ export default {
                       this.containerObj = {
                         name:resbody.name.toUpperCase(),
                         version:resbody.meta_version,
+                        license:resbody.license,
+                        versions:[],
                         images:[]
                       }
+
                       let all_versions = res.body
                       for(let j = 0 ; j < all_versions.length; j++){
                           let current_version = all_versions[j]
+                          var version_item = {
+                              tool: current_version.name,
+                              version: current_version.meta_version
+                          }
+                          this.containerObj.versions.push(version_item)
+
                           for(let i=0; i < current_version.container_images.length; i++){
                               let original_type = current_version.container_images[i].container_type == 'DOCKER'? "static/images/docker.png":"static/logo/biocontainers-logo.png"
+                              let prefix = current_version.container_images[i].container_type == 'DOCKER'? 'docker pull ': 'bioconda install '
                               var item = {
                                   tool: current_version.name,
                                   version: current_version.meta_version,
-                                  full_tag:current_version.container_images[i].full_tag,
+                                  full_tag: prefix + current_version.container_images[i].full_tag,
                                   size: (current_version.container_images[i].size/1024).toFixed(2) + "M",
-                                  last_updated: current_version.container_images[i].last_updated,
+                                  last_updated: current_version.container_images[i].last_updated.substring(0,9),
                                   // type: resbody.container_images[i].container_type
                                   type: original_type
                               }
