@@ -1,4 +1,7 @@
-# BioContainers Registry UI
+# DEPRECATED Repository. 
+
+**The Registry project has been merged with the registry-web page in repository Registry**
+
 
 
 This project provides a web UI for [BioContainers](https://biocontainers.pro)
